@@ -35,7 +35,7 @@ remotefs = { version = "0.2.0" }
 
 [package]
 name = "e-clients"
-version = "0.1.1"
+version = "0.1.2"
 description = "a rust services link upload: ftp、local、ssh、smb"
 authors = [
   "Eternal Night <EternalNight996@gmail.com, EternalNightYeah2@yeah.net>",
