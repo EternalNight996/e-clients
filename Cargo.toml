@@ -1,0 +1,59 @@
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+# 设置 crate 类型，有三个选项：`rlib` (Rust library)，`dylib` (dynamic library)，`cdylib` (C-compatible dynamic library)
+# 默认是 `rlib`
+crate-type = ["rlib"]
+proc-macro = false
+
+[features]
+ftp = ["suppaftp", "chrono"]
+smb = ["remotefs-smb"]
+ssh = ["remotefs-ssh"]
+default = []
+
+[target."cfg(not(target_os = \"macos\"))".dependencies]
+remotefs-smb = { version = "^0.2", optional = true }
+
+[target."cfg(target_family = \"windows\")"]
+[target."cfg(target_family = \"windows\")".dependencies]
+remotefs-ssh = { version = "^0.2.1", optional = true }
+suppaftp = { version = "^5.3.0", features = ["native-tls"], optional = true }
+
+[target."cfg(target_family = \"unix\")"]
+[target."cfg(target_family = \"unix\")".dependencies]
+remotefs-ssh = { version = "^0.2.1", features = [
+  "ssh2-vendored",
+], optional = true }
+suppaftp = { version = "^5.3.0", features = ["native-tls"], optional = true }
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+e-utils = "0.3"
+e-log = { version = "0.1", default-features = false, features = ["std"] }
+chrono = { version = "^0.4.35", optional = true }
+remotefs = { version = "0.2.0" }
+
+[package]
+name = "e-clients"
+version = "0.1.0"
+description = "a rust services link upload: ftp、local"
+authors = [
+  "Eternal Night <EternalNight996@gmail.com, EternalNightYeah2@yeah.net>",
+]
+edition = "2021"
+rust-version = "1.76.0"
+homepage = "https://gitee.com/eternalnight996"
+license-file = "MIT-LICENSE"
+readme = "README.md"
+documentation = "https://docs.rs/e-service"
+repository = "https://gitee.com/eternalnight996/e-service"
+include = ["src/", "*.md", "*-LICENSE", "Cargo.toml"]
+keywords = ["smb", "ftp", "ssh", "upload", "e-"]
+categories = []
+
+[package.metadata.docs.rs]
+# RUSTDOCFLAGS="--cfg doc_cfg" cargo +nightly doc --all-features --no-deps --open
+rustdoc-args = ["--cfg", "doc_cfg"]
+all-features = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
