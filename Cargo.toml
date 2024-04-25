@@ -7,7 +7,7 @@ proc-macro = false
 
 [features]
 ftp = ["suppaftp", "chrono"]
-smb = ["remotefs-smb", "remotefs/find"]
+smb = ["remotefs/find"]
 ssh = ["remotefs-ssh"]
 default = []
 
