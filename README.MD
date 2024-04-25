@@ -41,7 +41,7 @@
 ```toml
 [features]
 ftp = ["suppaftp", "chrono"]
-smb = ["remotefs-smb"]
+smb = []
 ssh = ["remotefs-ssh"]
 default = []
 ```
